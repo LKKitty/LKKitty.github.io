@@ -178,3 +178,5 @@ Today给自己列了一个小表格，emmmmm，要努力成长。。。。。
 ()17document.documentElement.scrollTop 垂直方向滚动的值
 (18)event.clientX+document.documentElement.scrollTop 相对文档的水平座标+垂直方向滚动的量
 ![](http://pbzngw3z7.bkt.clouddn.com/client.gif)
+(图片来自简书上某作者流沙麒麟客 
+)
