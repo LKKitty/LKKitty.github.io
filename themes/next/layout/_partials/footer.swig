@@ -24,8 +24,6 @@
 
 <div class="powered-by ">
 <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
-  有<span id="busuanzi_value_site_uv"></span>人看过我的博客啦
-  <span class="post-meta-divider">|</span>
 </span>
 </div>
 {% if theme.footer.powered %}
