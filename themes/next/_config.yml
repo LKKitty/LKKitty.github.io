@@ -94,7 +94,7 @@ index_with_subtitle: false
 menu:
   home: / || home
   #about: /about/ || user
-  #tags: /tags/ || tags
+  tags: /tags/ || tags
   #categories: /categories/ || th
   archives: /archives/ || archive
   #schedule: /schedule/ || calendar
@@ -111,10 +111,10 @@ menu_icons:
 # ---------------------------------------------------------------
 
 # Schemes
-#scheme: Muse
-scheme: Mist
+# scheme: Muse
+# scheme: Mist
 #scheme: Pisces
-#scheme: Gemini
+scheme: Gemini
 
 
 # ---------------------------------------------------------------
@@ -154,7 +154,8 @@ links_layout: block
 # Sidebar Avatar
 # in theme directory(source/images): /images/avatar.gif
 # in site  directory(source/uploads): /uploads/avatar.gif
-avatar: https://blog22-1258668722.cos.ap-guangzhou.myqcloud.com/%E5%BE%AE%E5%8D%9A%E5%9B%BE%E7%89%87/u%3D3870484026%2C1605348004%26fm%3D27%26gp%3D0.jpg?q-sign-algorithm=sha1&q-ak=AKIDlBKFmty4Wy5txxHWZrNlE4EZdnZ9U2va&q-sign-time=1555917669;1555919469&q-key-time=1555917669;1555919469&q-header-list=&q-url-param-list=&q-signature=d136e757a4133e96e1c557788c2e41f8d0187d08&x-cos-security-token=e84db7a9d9ede642b0823365bb2b4f70e0b0389810001
+avatar: https://blog22-1258668722.cos.ap-guangzhou.myqcloud.com/%E5%BE%AE%E5%8D%9A%E5%9B%BE%E7%89%87/u%3D3870484026%2C1605348004%26fm%3D27%26gp%3D0.jpg
+
 
 # Table Of Contents in the Sidebar
 toc:
