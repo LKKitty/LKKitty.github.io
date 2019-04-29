@@ -37,9 +37,11 @@ tags:
   + vdom即可解决这个问题
   + 提高重绘性能
 
-  ## vdom如何应用？ 核心API是什么
+
+## vdom如何应用？ 核心API是什么
   vdom是一类技术库，是比较独立的，下面我们将通过介绍[snabbdom](https://github.com/snabbdom/snabbdom)来了解vdom的用法
-  ### 介绍snabbdom
+
+### 介绍snabbdom
   snabbdom是一个虚拟DOM库，专注于简单性，模块化，强大的功能和性能。
   其中官方有给出一个例子：
   ```js
