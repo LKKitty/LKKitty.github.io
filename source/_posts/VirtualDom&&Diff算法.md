@@ -175,6 +175,7 @@ tags:
   ```
   # 小结
   啊！总结真的好难写，望坚持！
+  ![我很好](https://blog22-1258668722.cos.ap-guangzhou.myqcloud.com/blogImg/vdom/vdom4.jpg)
 
   # 参考资料
   [什么是虚拟DOM](https://www.cnblogs.com/gaosong-shuhong/p/9253959.html)
