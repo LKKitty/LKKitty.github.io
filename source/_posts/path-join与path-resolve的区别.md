@@ -13,8 +13,9 @@ const path = require('path')
 ```
 # path.resolve()
   path.resolve总是返回一个以相对于当前的工作目录（working directory）的绝对路径。
+  “__dirname”是node.js中的一个全局变量，它指向当前执行脚本所在的目录。
   ```js
-    path.resolve('./a', './b') // '/Users/username/Projects/webpack-demo/a/b'
+    path.resolve(__dirname, './b') // '/Users/username/Projects/webpack-demo/a/b'
   ```
 
 # path.join()
