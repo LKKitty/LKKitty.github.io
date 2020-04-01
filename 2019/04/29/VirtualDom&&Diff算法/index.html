@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="js," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="总结一下脑袋里的熔浆！！！！！">
+<meta name="keywords" content="js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Virtual Dom &amp;&amp; Diff算法">
+<meta property="og:url" content="http://yoursite.com/2019/04/29/VirtualDom&&Diff算法/index.html">
+<meta property="og:site_name" content="小二&#39;Blog">
+<meta property="og:description" content="总结一下脑袋里的熔浆！！！！！">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://blog22-1258668722.cos.ap-guangzhou.myqcloud.com/blogImg/vdom/vdom1.png">
+<meta property="og:image" content="https://blog22-1258668722.cos.ap-guangzhou.myqcloud.com/blogImg/vdom/vdom2.png">
+<meta property="og:image" content="https://blog22-1258668722.cos.ap-guangzhou.myqcloud.com/blogImg/vdom/vdom3.png">
+<meta property="og:image" content="https://blog22-1258668722.cos.ap-guangzhou.myqcloud.com/blogImg/vdom/vdom4.jpg">
+<meta property="og:updated_time" content="2020-03-31T06:53:27.917Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Virtual Dom &amp;&amp; Diff算法">
+<meta name="twitter:description" content="总结一下脑袋里的熔浆！！！！！">
+<meta name="twitter:image" content="https://blog22-1258668722.cos.ap-guangzhou.myqcloud.com/blogImg/vdom/vdom1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/29/VirtualDom&&Diff算法/"/>
+
+
+
+
+
+  <title>Virtual Dom && Diff算法 | 小二'Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/LKKitty" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小二'Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">自信的小胖纸</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/29/VirtualDom&&Diff算法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小二">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://blog22-1258668722.cos.ap-guangzhou.myqcloud.com/%E5%BE%AE%E5%8D%9A%E5%9B%BE%E7%89%87/u%3D3870484026%2C1605348004%26fm%3D27%26gp%3D0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小二'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Virtual Dom && Diff算法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-29T09:39:27+08:00">
+                2019-04-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>  总结一下脑袋里的熔浆！！！！！<br>  <a id="more"></a></p>
+<h1 id="关于Virtual-Dom"><a href="#关于Virtual-Dom" class="headerlink" title="关于Virtual Dom"></a>关于Virtual Dom</h1><p> Virtual Dom 翻译为虚拟DOM,这个词语在我的脑袋中已经存在了很久，但一直不了解这是个什么东东！！！！！现在让我们来看一下他到底是个什么东西！！！！！<br>  Virtual Dom在下文中简称为vdom（本人英语渣渣，实在太长了，就用简写吧，小声哔哔）。</p>
+<h2 id="vdom是什么？"><a href="#vdom是什么？" class="headerlink" title="vdom是什么？"></a>vdom是什么？</h2><p>  vdom是虚拟的dom,简单来说vdom可以看作是一个使用javascript模拟了DOM结构的树形结构，这个树形结构包含了整个DOM结构的信息，如下图：<br>  <img src="https://blog22-1258668722.cos.ap-guangzhou.myqcloud.com/blogImg/vdom/vdom1.png" alt=""></p>
+<p>  在上图中，左边是真实的DOM树结构，右边是用JavaScript模拟的DOM树结构，从图中可以看出，javascript模拟的dom树结构一一对应左边的真实dom(标签名/标签属性/标签的子结构)。</p>
+<h5 id="顺便值得一提的是，在前端语言-html-css-js-中，只有js可以模拟dom-因为只有js是图灵完备语言-可以写逻辑-，Dom变化的对比，放在JS层来做"><a href="#顺便值得一提的是，在前端语言-html-css-js-中，只有js可以模拟dom-因为只有js是图灵完备语言-可以写逻辑-，Dom变化的对比，放在JS层来做" class="headerlink" title="顺便值得一提的是，在前端语言(html/css/js)中，只有js可以模拟dom,因为只有js是图灵完备语言(可以写逻辑)，Dom变化的对比，放在JS层来做"></a>顺便值得一提的是，在前端语言(html/css/js)中，只有js可以模拟dom,因为只有js是图灵完备语言(可以写逻辑)，Dom变化的对比，放在JS层来做</h5><h2 id="vdom为何会存在？"><a href="#vdom为何会存在？" class="headerlink" title="vdom为何会存在？"></a>vdom为何会存在？</h2><p>  在解答这个问题之前，我们先来看一个用jQuery写的一个例子:<br>  </p><p class="codepen" data-height="265" data-theme-id="0" data-default-tab="js,result" data-user="LKKitty" data-slug-hash="OGqaEa" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="OGqaEa"><br>  <span>See the Pen <a href="https://codepen.io/LKKitty/pen/OGqaEa/" target="_blank" rel="noopener"><br>  OGqaEa</a> by LKKitty (<a href="https://codepen.io/LKKitty" target="_blank" rel="noopener">@LKKitty</a>)<br>  on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</span><br> </p><br> <script async src="https://static.codepen.io/assets/embed/ei.js"></script><p></p>
+<p>  这是一个用JQuery写的间的table表单，在例子当点击change按钮时，表单数据会进行变化。<br>  在代码中我们发现，当我们点击change按钮时我们需要再一次执行render()函数，即再一次进行渲染，而每一次执行render()，都需要清空容器（清空container，上一次执行的结果会继续保留），再把修改后的dom结构放到container中，而我们需改的数据只是其中的一两个，却要整个dom树全部删除再重绘，这是非常的耗费性能的（修改dom结构是昂贵的）。</p>
+<h5 id="因此-vdom就出现了"><a href="#因此-vdom就出现了" class="headerlink" title="因此 vdom就出现了"></a>因此 vdom就出现了</h5><p>  vdom就是为了解决dom树全部删除再重绘的低性能问题而存在的啦（个人理解哈），使用js来模拟dom树结构，将模拟的dom与真实dom用diff算法（下文将会进行介绍）进行比较差异，将需要修改的dom结构进行修改，没有变化的dom原封不动。<br>  由于dom操作是非常耗性能的，也是非常昂贵的，所以我们要尽量少的进行dom操作，要尽可能多的用js来代替这些操作的执行。</p>
+<ul>
+<li>DOM操作时“昂贵”的，js运行效率高</li>
+<li>将DOM操作对比放在JS层，提高效率</li>
+<li>尽量减少DOM操作，而不是“推倒重来”</li>
+<li>项目越复杂，影响越严重</li>
+<li>vdom即可解决这个问题</li>
+<li>提高重绘性能</li>
+</ul>
+<h2 id="vdom如何应用？-核心API是什么"><a href="#vdom如何应用？-核心API是什么" class="headerlink" title="vdom如何应用？ 核心API是什么"></a>vdom如何应用？ 核心API是什么</h2><p>  vdom是一类技术库，是比较独立的，下面我们将通过介绍<a href="https://github.com/snabbdom/snabbdom" target="_blank" rel="noopener">snabbdom</a>来了解vdom的用法</p>
+<h3 id="介绍snabbdom"><a href="#介绍snabbdom" class="headerlink" title="介绍snabbdom"></a>介绍snabbdom</h3><p>  snabbdom是一个虚拟DOM库，专注于简单性，模块化，强大的功能和性能。<br>  其中官方有给出一个例子：<br>  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> snabbdom = <span class="built_in">require</span>(<span class="string">'snabbdom'</span>);</span><br><span class="line"><span class="keyword">var</span> patch = snabbdom.init([ <span class="comment">// Init patch function with chosen modules</span></span><br><span class="line">  <span class="built_in">require</span>(<span class="string">'snabbdom/modules/class'</span>).default, <span class="comment">// makes it easy to toggle classes</span></span><br><span class="line">  <span class="built_in">require</span>(<span class="string">'snabbdom/modules/props'</span>).default, <span class="comment">// for setting properties on DOM elements</span></span><br><span class="line">  <span class="built_in">require</span>(<span class="string">'snabbdom/modules/style'</span>).default, <span class="comment">// handles styling on elements with support for animations</span></span><br><span class="line">  <span class="built_in">require</span>(<span class="string">'snabbdom/modules/eventlisteners'</span>).default, <span class="comment">// attaches event listeners</span></span><br><span class="line">]);</span><br><span class="line"><span class="keyword">var</span> h = <span class="built_in">require</span>(<span class="string">'snabbdom/h'</span>).default; <span class="comment">// helper function for creating vnodes</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> container = <span class="built_in">document</span>.getElementById(<span class="string">'container'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> vnode = h(<span class="string">'div#container.two.classes'</span>, &#123;<span class="attr">on</span>: &#123;<span class="attr">click</span>: someFn&#125;&#125;, [</span><br><span class="line">  h(<span class="string">'span'</span>, &#123;<span class="attr">style</span>: &#123;<span class="attr">fontWeight</span>: <span class="string">'bold'</span>&#125;&#125;, <span class="string">'This is bold'</span>),</span><br><span class="line">  <span class="string">' and this is just normal text'</span>,</span><br><span class="line">  h(<span class="string">'a'</span>, &#123;<span class="attr">props</span>: &#123;<span class="attr">href</span>: <span class="string">'/foo'</span>&#125;&#125;, <span class="string">'I\'ll take you places!'</span>)</span><br><span class="line">]);</span><br><span class="line"><span class="comment">// Patch into empty DOM element – this modifies the DOM as a side effect</span></span><br><span class="line">patch(container, vnode);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> newVnode = h(<span class="string">'div#container.two.classes'</span>, &#123;<span class="attr">on</span>: &#123;<span class="attr">click</span>: anotherEventHandler&#125;&#125;, [</span><br><span class="line">  h(<span class="string">'span'</span>, &#123;<span class="attr">style</span>: &#123;<span class="attr">fontWeight</span>: <span class="string">'normal'</span>, <span class="attr">fontStyle</span>: <span class="string">'italic'</span>&#125;&#125;, <span class="string">'This is now italic type'</span>),</span><br><span class="line">  <span class="string">' and this is still just normal text'</span>,</span><br><span class="line">  h(<span class="string">'a'</span>, &#123;<span class="attr">props</span>: &#123;<span class="attr">href</span>: <span class="string">'/bar'</span>&#125;&#125;, <span class="string">'I\'ll take you places!'</span>)</span><br><span class="line">]);</span><br><span class="line"><span class="comment">// Second `patch` invocation</span></span><br><span class="line">patch(vnode, newVnode); <span class="comment">// Snabbdom efficiently updates the old view to the new state</span></span><br></pre></td></tr></table></figure></p>
+<p>  这里可以看到列出来的两个核心函数，即h()函数和patch()函数。</p>
+<h4 id="h"><a href="#h" class="headerlink" title="h()"></a>h()</h4><p>  首先我们先来了解h()<br>  <img src="https://blog22-1258668722.cos.ap-guangzhou.myqcloud.com/blogImg/vdom/vdom2.png" alt="vdom"><br>  从图中可以看出h()通过传入参数，返回的是一个vnode节点，模拟的是一个真实的dom节点，创建的虚拟DOM树里面的结构在左边的vnode里都有体现，所以现在看来我们的虚拟DOM结构树和snabbdom中的h()函数是完全可以对应起来的，可以通过一个方法将虚拟DOM结构转化成vnode；而上图中newVnode则指的是虚拟DOM树中的数据发生变化之后生成的vnode。</p>
+<h4 id="patch"><a href="#patch" class="headerlink" title="patch()"></a>patch()</h4><p>  patch()分为两种情况，两种情况都分别要传入两个参数</p>
+<ul>
+<li><p>第一种情况 </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">patch(container,vnode)</span><br></pre></td></tr></table></figure>
+<p>第一个参数为container，是一个真实的dom节点，是一个存放节点的容器，第二个参数vnode就是上面h()所返回的vnode,此时的patch()函数的作用是用来将初始化生成的真实的dom结构全部渲染到指定的空白容器container上</p>
+</li>
+<li><p>第二种情况</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">patch(vnode,newVnode)</span><br></pre></td></tr></table></figure>
+<p>当数据源有变化时，就要进行patch(vnode,newVnode)，第一个参数为上一次h()函数返回的vnode,第二个参数时当数据改变后h()返回的新的newVnode节点，此时patch函数的作用是使用diff算法对比两个参数的差异，进而更新参数变化的DOM节点。即根据diff算法找出数据改变前后的差异，只改动需要改动的dom节点，没有改变的dom节点，完全不动它，原来是什么样的现在就是什么样的。这样就减少了dom操作</p>
+<h3 id="snabbdom的简单使用"><a href="#snabbdom的简单使用" class="headerlink" title="snabbdom的简单使用"></a>snabbdom的简单使用</h3><p></p><p class="codepen" data-height="265" data-theme-id="0" data-default-tab="js,result" data-user="LKKitty" data-slug-hash="vMPMRM" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid black; margin: 1em 0; padding: 1em;" data-pen-title="snabbdom-demo"><br><span>See the Pen <a href="https://codepen.io/LKKitty/pen/vMPMRM/" target="_blank" rel="noopener"><br>snabbdom-demo</a> by LKKitty (<a href="https://codepen.io/LKKitty" target="_blank" rel="noopener">@LKKitty</a>)<br>on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</span><br></p><br><script async src="https://static.codepen.io/assets/embed/ei.js"></script><br>将这个例子放在浏览器中运行，在控制台中观看Elements节点的变化：<p></p>
+</li>
+</ul>
+<p><img src="https://blog22-1258668722.cos.ap-guangzhou.myqcloud.com/blogImg/vdom/vdom3.png" alt="vdom"><br>从图中可以看出，改变的只有后面两个Item,Ietm1并没有任何的变化（没有闪烁说明没有改动还是原来的dom）。这相比于jq的全部删除再填充，snabbdom的vdom就大大提高了了性能，这也能从侧面说明了vdom存在的重要性。</p>
+<h1 id="关于Diff算法"><a href="#关于Diff算法" class="headerlink" title="关于Diff算法"></a>关于Diff算法</h1><p>  在上文中我们了解了snabbdom库的主要核心函数有h()和patch()两个函数，其中patch()的第二个用法就是对比新旧vnode的差异在进行渲染，那么patch()是如何来对比新旧vnode的差异的呢？这里就涉及了一个算法叫 <strong><em>DIFF</em></strong> 算法。</p>
+<h2 id="简单介绍diff算法"><a href="#简单介绍diff算法" class="headerlink" title="简单介绍diff算法"></a>简单介绍diff算法</h2><p>  diff其实是linux中的一个基础的命令用来对比两个文本文件之间的差异。<br>  vue中应用diff算法是为了找出需要更新的节点。<br>  其实在我们日常开发中我们都在接触类似与diff算法的一些软件，比如svn可以看到当前代码和svn服务器上代码的不同之处，再如Beyond Compare这款软件也可以为我们指出两个对比文件的不同之处。<br>  简单使用如下：<br>  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> vnode = </span><br><span class="line">&#123;</span><br><span class="line">  tag: <span class="string">'ul'</span>,</span><br><span class="line">  attrs: &#123;<span class="attr">id</span>: <span class="string">'list'</span>&#125;,</span><br><span class="line">  children:[</span><br><span class="line">    &#123;</span><br><span class="line">      tag: <span class="string">'li'</span>,</span><br><span class="line">      attrs:&#123;</span><br><span class="line">        className:<span class="string">'item'</span>,</span><br><span class="line">        children:[<span class="string">'Item1'</span>]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,&#123;</span><br><span class="line">      tag: <span class="string">'li'</span>,</span><br><span class="line">      attrs:&#123;</span><br><span class="line">        className:<span class="string">'item'</span>,</span><br><span class="line">        children:[<span class="string">'Item2'</span>]</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createElement</span>(<span class="params">vnode</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> tag = vnode.tag</span><br><span class="line">  <span class="keyword">var</span> attrs = vnode.attrs || &#123;&#125;</span><br><span class="line">  <span class="keyword">var</span> children = vnode.children || []</span><br><span class="line">  <span class="keyword">if</span>(!tag) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 创建元素</span></span><br><span class="line">  <span class="keyword">var</span> elem = <span class="built_in">document</span>.createElement(tag)</span><br><span class="line">  <span class="comment">// 属性</span></span><br><span class="line">  <span class="keyword">var</span> attrName</span><br><span class="line">  <span class="keyword">for</span> (attrName <span class="keyword">in</span> attrs) &#123;</span><br><span class="line">    <span class="keyword">if</span>(atrrs.hasOwnProperty(attrName)) &#123;</span><br><span class="line">      elem.setAttribute(attrName,attrs[attrName])</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 子元素</span></span><br><span class="line">  children.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">childVnode</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 给elem添加子元素</span></span><br><span class="line">    elem.appendChild(createElement(childVnode))</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// 返回真实的Dom</span></span><br><span class="line">  <span class="keyword">return</span> elem</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 对比elem</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">updateChildren</span>(<span class="params">vnode,newVnode</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> children = vnode.children || []</span><br><span class="line">  <span class="keyword">var</span> newChildren = newVnode.children || []</span><br><span class="line">  children.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">childVnode,index</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> newChildVnode = newChildren[index]</span><br><span class="line">    <span class="keyword">if</span>(childVnode.tag === newChildVnode.tag) &#123;</span><br><span class="line">      <span class="comment">// 深层次对比（递归）</span></span><br><span class="line">      updateChildren(childVnode,newChildVnode)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// 替换</span></span><br><span class="line">      replaceNode(childVnode,newChildVnode)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>  啊！总结真的好难写，望坚持！<br>  <img src="https://blog22-1258668722.cos.ap-guangzhou.myqcloud.com/blogImg/vdom/vdom4.jpg" alt="我很好"></p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p>  <a href="https://www.cnblogs.com/gaosong-shuhong/p/9253959.html" target="_blank" rel="noopener">什么是虚拟DOM</a><br>  <a href="https://coding.imooc.com/class/190.html" target="_blank" rel="noopener">揭秘一线互联网企业前端JavaScript高级面试</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+    <div>
+    
+      <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">
+            -------------越努力越幸运
+            <i class="fa fa-paw"></i>
+            感谢您的阅读-------------
+        </div>
+    
+</div>
+
+    
+    </div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/js/" rel="tag"># js</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/22/关于函数节流和函数去抖/" rel="next" title="关于函数节流和函数去抖">
+                <i class="fa fa-chevron-left"></i> 关于函数节流和函数去抖
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/23/web端拍照与录像/" rel="prev" title="web端拍照与录像">
+                web端拍照与录像 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://blog22-1258668722.cos.ap-guangzhou.myqcloud.com/%E5%BE%AE%E5%8D%9A%E5%9B%BE%E7%89%87/u%3D3870484026%2C1605348004%26fm%3D27%26gp%3D0.jpg"
+                alt="小二" />
+            
+              <p class="site-author-name" itemprop="name">小二</p>
+              <p class="site-description motion-element" itemprop="description">小二上茶</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#关于Virtual-Dom"><span class="nav-number">1.</span> <span class="nav-text">关于Virtual Dom</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#vdom是什么？"><span class="nav-number">1.1.</span> <span class="nav-text">vdom是什么？</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#顺便值得一提的是，在前端语言-html-css-js-中，只有js可以模拟dom-因为只有js是图灵完备语言-可以写逻辑-，Dom变化的对比，放在JS层来做"><span class="nav-number">1.1.0.0.1.</span> <span class="nav-text">顺便值得一提的是，在前端语言(html/css/js)中，只有js可以模拟dom,因为只有js是图灵完备语言(可以写逻辑)，Dom变化的对比，放在JS层来做</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vdom为何会存在？"><span class="nav-number">1.2.</span> <span class="nav-text">vdom为何会存在？</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#因此-vdom就出现了"><span class="nav-number">1.2.0.0.1.</span> <span class="nav-text">因此 vdom就出现了</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vdom如何应用？-核心API是什么"><span class="nav-number">1.3.</span> <span class="nav-text">vdom如何应用？ 核心API是什么</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#介绍snabbdom"><span class="nav-number">1.3.1.</span> <span class="nav-text">介绍snabbdom</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#h"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">h()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#patch"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">patch()</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#snabbdom的简单使用"><span class="nav-number">1.3.2.</span> <span class="nav-text">snabbdom的简单使用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于Diff算法"><span class="nav-number">2.</span> <span class="nav-text">关于Diff算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单介绍diff算法"><span class="nav-number">2.1.</span> <span class="nav-text">简单介绍diff算法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#小结"><span class="nav-number">3.</span> <span class="nav-text">小结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-number">4.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小二</span>
+
+  
+</div>
+
+<div class="powered-by ">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+</span>
+</div>
+
+  <div class="powered-by">往后的余生，我只要你</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">本猪猪</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<script type="text/javascript" src="/js/src/love.js"></script>

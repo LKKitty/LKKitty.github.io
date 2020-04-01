@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="总结一些写了这么多项目之后遇到的坑~">
+<meta property="og:type" content="article">
+<meta property="og:title" content="那些我遇到的坑~">
+<meta property="og:url" content="http://yoursite.com/2018/11/30/那些我遇到的坑/index.html">
+<meta property="og:site_name" content="小二&#39;Blog">
+<meta property="og:description" content="总结一些写了这么多项目之后遇到的坑~">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-03-31T06:53:27.917Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="那些我遇到的坑~">
+<meta name="twitter:description" content="总结一些写了这么多项目之后遇到的坑~">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/30/那些我遇到的坑/"/>
+
+
+
+
+
+  <title>那些我遇到的坑~ | 小二'Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/LKKitty" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小二'Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">自信的小胖纸</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/30/那些我遇到的坑/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小二">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://blog22-1258668722.cos.ap-guangzhou.myqcloud.com/%E5%BE%AE%E5%8D%9A%E5%9B%BE%E7%89%87/u%3D3870484026%2C1605348004%26fm%3D27%26gp%3D0.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小二'Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">那些我遇到的坑~</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-30T10:12:56+08:00">
+                2018-11-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>总结一些写了这么多项目之后遇到的坑~<br><a id="more"></a></p>
+<h1 id="1-ajax的post提交参数长度超出限制"><a href="#1-ajax的post提交参数长度超出限制" class="headerlink" title="1.ajax的post提交参数长度超出限制"></a>1.ajax的post提交参数长度超出限制</h1><p>这是一个 图片的base64编码字符串的post提交，<br>一般的图片base64都可以提交<br>只有某一个由于字符串较长所以，提交失败。<br>post的数据大小在3M以上，查阅网上资料说，最大可以提交2M，也有说post提交无限制，是服务器的设置问题。</p>
+<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>将base64格式的字符转换成Blod格式，然后使用formdata格式的方式提交给后台，后台再进行解析,其他类似的超出最大限制的问题，也可以尝试这一类的做法。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">// 将图片Base64 转成Blod</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dataURLtoBlod</span>(<span class="params">img</span>) </span>&#123;</span><br><span class="line">  img = img.split(<span class="string">','</span>)[<span class="number">1</span>]</span><br><span class="line">  img = <span class="built_in">window</span>.atob(img)</span><br><span class="line">  <span class="keyword">var</span> ia = <span class="keyword">new</span> <span class="built_in">Uint8Array</span>(img.length)</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; img.length; i++) &#123;</span><br><span class="line">    ia[i] = img.charCodeAt(i)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">var</span> blob = <span class="keyword">new</span> Blob([ia], &#123; <span class="attr">type</span>: <span class="string">'image/png'</span> &#125;)</span><br><span class="line">  <span class="keyword">var</span> formdata = <span class="keyword">new</span> FormData()</span><br><span class="line">  formdata.append(<span class="string">'file'</span>, blob)</span><br><span class="line">  <span class="keyword">return</span> formdata</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 提交数据</span></span><br><span class="line">$.ajax(&#123;</span><br><span class="line">  url : url,</span><br><span class="line">  data :  formdata,</span><br><span class="line">  processData : <span class="literal">false</span>, </span><br><span class="line">  contentType : <span class="literal">false</span>, </span><br><span class="line">  dataType: <span class="string">'json'</span>,</span><br><span class="line">  type : <span class="string">"POST"</span>,</span><br><span class="line">  success : <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<h1 id="vue开发时，使用axios的post方法向后台返回数据时，后端拿不到返回数据"><a href="#vue开发时，使用axios的post方法向后台返回数据时，后端拿不到返回数据" class="headerlink" title="vue开发时，使用axios的post方法向后台返回数据时，后端拿不到返回数据"></a>vue开发时，使用axios的post方法向后台返回数据时，后端拿不到返回数据</h1><p>一开始我是这么写的 ，post里面的数据放在params里面，这样是有问题的，在使用axios时，要注意到配置选项中包含params和data两者，以为他们是相同的，实则不然。<br>因为params是添加到url的请求字符串中的，用于get请求。<br>而data是添加到请求体（body）中的， 用于post请求。<br>然后我把params改为了data，后台还是接收不到，查阅了很多资料，需要把Content-Type为application/x-www-form-urlencoded，<br>jquery在执行post请求时，会设置Content-Type为application/x-www-form-urlencoded，所以服务器能够正确解析，而使用原生ajax、axios请求时，如果不显示的设置Content-Type，那么默认是text/plain，这时服务器就不知道怎么解析数据了，所以才只能通过获取原始数据流的方式来进行解析请求数据</p>
+<h3 id="解决办法-1"><a href="#解决办法-1" class="headerlink" title="解决办法"></a>解决办法</h3><p>(1) 安装qs,在 main.js里引入<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">'axios'</span>;</span><br><span class="line"><span class="keyword">import</span> qs <span class="keyword">from</span> <span class="string">'qs'</span>;</span><br><span class="line">Vue.prototype.$qs = qs;</span><br><span class="line">axios.defaults.headers.post[<span class="string">'Content-Type'</span>] = <span class="string">'application/x-www-form-urlencoded'</span>;</span><br></pre></td></tr></table></figure></p>
+<p>(2)在vue组件里的请求方法<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> postData = <span class="keyword">this</span>.$qs.stringify(&#123;</span><br><span class="line">    key1:value1,</span><br><span class="line">    key2:value2,</span><br><span class="line">    key3:value3,</span><br><span class="line">&#125;);</span><br><span class="line"><span class="keyword">this</span>.$axios(&#123;</span><br><span class="line">    method: <span class="string">'post'</span>,</span><br><span class="line">    url:<span class="string">'url'</span>,</span><br><span class="line">    data:postData</span><br><span class="line">&#125;).then(<span class="function">(<span class="params">res</span>)=&gt;</span>&#123;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h1 id="vue-cli搭建vue项目开发时，使用文字溢出显示…省略号，打包项目后不起作用"><a href="#vue-cli搭建vue项目开发时，使用文字溢出显示…省略号，打包项目后不起作用" class="headerlink" title="vue-cli搭建vue项目开发时，使用文字溢出显示…省略号，打包项目后不起作用"></a>vue-cli搭建vue项目开发时，使用文字溢出显示…省略号，打包项目后不起作用</h1><p>使用vue-cli脚手架搭建项目打包后属性-webkit-line-clamp这个属性会被postCss这个插件去掉，原因可能是觉得这个属性不规范。</p>
+<h3 id="解决办法-2"><a href="#解决办法-2" class="headerlink" title="解决办法"></a>解决办法</h3><p>将样式写在行内样式里，这样就不会被插件去掉</p>
+<h1 id="vue开发，video标签内包含source标签，打包后后台获取的视屏不能播放"><a href="#vue开发，video标签内包含source标签，打包后后台获取的视屏不能播放" class="headerlink" title="vue开发，video标签内包含source标签，打包后后台获取的视屏不能播放"></a>vue开发，video标签内包含source标签，打包后后台获取的视屏不能播放</h1><h3 id="解决办法-3"><a href="#解决办法-3" class="headerlink" title="解决办法"></a>解决办法</h3><p>去掉source标签，在video标签上加src</p>
+<h1 id="在html页面上显示不出空格和换行"><a href="#在html页面上显示不出空格和换行" class="headerlink" title="在html页面上显示不出空格和换行"></a>在html页面上显示不出空格和换行</h1><p>首先检查拿到的数据是否又空格和换行，如果没有，那就是后台的问题<br>如果拿到的数据有空格和换行，而页面上没有显示，那就是前端问题<br>pre元素可定义预格式化的文本。被包围在pre元素中的文本通常会保留空格和换行符，二文本也会呈现等宽字体(兼容多个浏览器)<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">pre</span> &#123;</span><br><span class="line">  <span class="attribute">white-space</span>: pre-wrap</span><br><span class="line">  white-space: -moz-pre-wrap</span><br><span class="line">  white-space : -o-pre-wrap</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="空格校验"><a href="#空格校验" class="headerlink" title="空格校验"></a>空格校验</h1><p>当输入的内容全是空格时，校验相当与没有输入任何内容<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">value.split(<span class="string">' '</span>).join(<span class="string">''</span>).length ==== <span class="number">0</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="新版本chrome浏览器默认禁止自动播放-滑动触摸等功能"><a href="#新版本chrome浏览器默认禁止自动播放-滑动触摸等功能" class="headerlink" title="新版本chrome浏览器默认禁止自动播放/滑动触摸等功能"></a>新版本chrome浏览器默认禁止自动播放/滑动触摸等功能</h1><p>Chrome的autoplay政策在2018年4月做了更改。<br>新的行为：浏览器为了提高用户体验，减少数据消耗，现在都在遵循autoplay政策，Chrome的autoplay 政策非常简单</p>
+<ol>
+<li>muted autoplay始终被允许</li>
+<li>音乐的autoplay 只有在下面集中情况下起作用：<ol>
+<li>有用户行为发生像（click,tap,etc）.</li>
+<li>对于桌面程序，用户已经提前播放了音频</li>
+<li>对于移动端用户将音频网址home screen.<h3 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h3>Open <a href="chrome://flags/#autoplay-policy" target="_blank" rel="noopener">chrome://flags/#autoplay-policy</a><br>Setting No user gesture is required(不需要用户手动触发)<br>Relaunch Chrome</li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+    <div>
+    
+      <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">
+            -------------越努力越幸运
+            <i class="fa fa-paw"></i>
+            感谢您的阅读-------------
+        </div>
+    
+</div>
+
+    
+    </div>
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/08/那些表单元素啊/" rel="next" title="那些表单元素啊">
+                <i class="fa fa-chevron-left"></i> 那些表单元素啊
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/22/关于函数节流和函数去抖/" rel="prev" title="关于函数节流和函数去抖">
+                关于函数节流和函数去抖 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://blog22-1258668722.cos.ap-guangzhou.myqcloud.com/%E5%BE%AE%E5%8D%9A%E5%9B%BE%E7%89%87/u%3D3870484026%2C1605348004%26fm%3D27%26gp%3D0.jpg"
+                alt="小二" />
+            
+              <p class="site-author-name" itemprop="name">小二</p>
+              <p class="site-description motion-element" itemprop="description">小二上茶</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-ajax的post提交参数长度超出限制"><span class="nav-number">1.</span> <span class="nav-text">1.ajax的post提交参数长度超出限制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解决办法"><span class="nav-number">1.0.1.</span> <span class="nav-text">解决办法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vue开发时，使用axios的post方法向后台返回数据时，后端拿不到返回数据"><span class="nav-number">2.</span> <span class="nav-text">vue开发时，使用axios的post方法向后台返回数据时，后端拿不到返回数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解决办法-1"><span class="nav-number">2.0.1.</span> <span class="nav-text">解决办法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vue-cli搭建vue项目开发时，使用文字溢出显示…省略号，打包项目后不起作用"><span class="nav-number">3.</span> <span class="nav-text">vue-cli搭建vue项目开发时，使用文字溢出显示…省略号，打包项目后不起作用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解决办法-2"><span class="nav-number">3.0.1.</span> <span class="nav-text">解决办法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vue开发，video标签内包含source标签，打包后后台获取的视屏不能播放"><span class="nav-number">4.</span> <span class="nav-text">vue开发，video标签内包含source标签，打包后后台获取的视屏不能播放</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解决办法-3"><span class="nav-number">4.0.1.</span> <span class="nav-text">解决办法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#在html页面上显示不出空格和换行"><span class="nav-number">5.</span> <span class="nav-text">在html页面上显示不出空格和换行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#空格校验"><span class="nav-number">6.</span> <span class="nav-text">空格校验</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#新版本chrome浏览器默认禁止自动播放-滑动触摸等功能"><span class="nav-number">7.</span> <span class="nav-text">新版本chrome浏览器默认禁止自动播放/滑动触摸等功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方案："><span class="nav-number">7.0.1.</span> <span class="nav-text">解决方案：</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小二</span>
+
+  
+</div>
+
+<div class="powered-by ">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+</span>
+</div>
+
+  <div class="powered-by">往后的余生，我只要你</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">本猪猪</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<script type="text/javascript" src="/js/src/love.js"></script>
