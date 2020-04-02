@@ -4,6 +4,8 @@ date: 2020-04-02 09:21:47
 tags:
   - git
 ---
+记录一些常用git命令
+<!-- more -->
 # git专用名词译名
 - Workspace：工作区
 - Index / Stage：暂存区
